@@ -6,11 +6,11 @@
  */
 
 // Outputs
-int greenled = 7; 
+//int greenled = 7; 
 int camera = 8;
-int led = 9;
-int whisker = 3;
-int laser = 12;
+//int led = 9;
+//int whisker = 3;
+//int laser = 12;
 int puff = 13;
 int tonepin = 10;
 
@@ -27,7 +27,7 @@ int usch = 3;   // default to ipsi corneal puff
 int ISI = 140;
 int usdur = 30;
 int residual;
-int tonefreq5 = 5000;
+//int tonefreq5 = 5000;
 
 unsigned long trialtime = 0; // For keeping track of elapsed time during trial
 
@@ -35,20 +35,20 @@ unsigned long trialtime = 0; // For keeping track of elapsed time during trial
 void setup() {
   // initialize the digital pin as an output.
   pinMode(camera, OUTPUT);
-  pinMode(led, OUTPUT);
+  //pinMode(led, OUTPUT);
   pinMode(puff, OUTPUT);
-  pinMode(whisker, OUTPUT);
-  pinMode(greenled, OUTPUT); 
-  pinMode(laser, OUTPUT); 
+  //pinMode(whisker, OUTPUT);
+  //pinMode(greenled, OUTPUT); 
+  //pinMode(laser, OUTPUT); 
   pinMode(tonepin, OUTPUT);
 
   // Default all output pins to LOW - for some reason they were floating high on the Due before I (Shane) added this
   digitalWrite(camera, LOW);
-  digitalWrite(led, LOW);
+  //digitalWrite(led, LOW);
   digitalWrite(puff, LOW);
-  digitalWrite(whisker, LOW);
-  digitalWrite(greenled, LOW);
-  digitalWrite(laser, LOW);
+  //digitalWrite(whisker, LOW);
+  //digitalWrite(greenled, LOW);
+  //digitalWrite(laser, LOW);
   digitalWrite(tonepin, LOW);
 
   Serial.begin(115200);
@@ -101,9 +101,9 @@ void checkVars() {
       case 7:
         ISI = value;
         break;
-      case 8:
-        tonefreq5 = value;
-        break;
+  //    case 8:
+  //      tonefreq5 = value;
+  //      break;
       case 9:
         camposttime = value;
         break;
@@ -183,24 +183,24 @@ void doDelay() {
 void csON() {
  if (csdur > 0) {
     switch (csch) {
-      case 1:
-        digitalWrite(led, HIGH);   // turn the LED on (HIGH is the voltage level)
-        break;
-      case 2:
-        digitalWrite(whisker, HIGH);   // turn the LED on (HIGH is the voltage level)
-        break;
+//      case 1:
+//        digitalWrite(led, HIGH);   // turn the LED on (HIGH is the voltage level)
+//        break;
+//      case 2:
+//        digitalWrite(whisker, HIGH);   // turn the LED on (HIGH is the voltage level)
+//        break;
       case 5:
-        tone(10, 5000, csdur);   
+        tone(10, 20, csdur);   
         break;
-      case 6:
-        tone(10, 10000, csdur);   
-        break;
-      case  7:
-        digitalWrite(greenled, HIGH); // turn the green LED on (HIGH is the voltage level) 
-        break; 
-      case 8:
-        tone(10, 1000, csdur);   
-        break;
+//      case 6:
+//        tone(10, 10000, csdur);   
+//        break;
+//      case  7:
+//        digitalWrite(greenled, HIGH); // turn the green LED on (HIGH is the voltage level) 
+//        break; 
+//      case 8:
+//        tone(10, 1000, csdur);   
+//        break;
     }
   } 
 }
@@ -209,15 +209,15 @@ void csON() {
 void csOFF() {
      if (csdur > 0) {
     switch (csch) {
-      case 1:
-        digitalWrite(led, LOW);   // turn the LED on (HIGH is the voltage level)
-        break;
-      case 2:
-        digitalWrite(whisker, LOW);   // turn the LED on (HIGH is the voltage level)
-        break;
-      case 7:
-        digitalWrite(greenled, LOW); //  turn the green LED off (LOW is the voltage level) 
-        break; 
+//      case 1:
+//        digitalWrite(led, LOW);   // turn the LED on (HIGH is the voltage level)
+//        break;
+//      case 2:
+//        digitalWrite(whisker, LOW);   // turn the LED on (HIGH is the voltage level)
+//        break;
+//      case 7:
+//        digitalWrite(greenled, LOW); //  turn the green LED off (LOW is the voltage level) 
+//        break; 
     }
   }
 }
@@ -226,30 +226,30 @@ void usON() {
     if (usdur > 0) {
 
     switch (usch) {
-      case 1:
-        usout = led;
-        break;
-      case 2:
-        usout = whisker;
-        break;
+//      case 1:
+//        usout = led;
+//        break;
+//      case 2:
+//        usout = whisker;
+//        break;
       case 3:
         usout = puff;
         break;
-      case 7:
-        usout = greenled;
-        break;
-      case 5:      // Tone is a special case that we have to handle differently 
-        tone(10, 5000, usdur);
-        usout = 0;
-        break;
-      case 6:      // Tone is a special case that we have to handle differently 
-        tone(10, 10000, usdur);
-        usout = 0;
-        break;
-      case 8:      // Tone is a special case that we have to handle differently 
-        tone(10, 1000, usdur);
-        usout = 0;
-        break;
+//      case 7:
+//        usout = greenled;
+//        break;
+//      case 5:      // Tone is a special case that we have to handle differently 
+//        tone(10, 5000, usdur);
+//        usout = 0;
+//        break;
+//      case 6:      // Tone is a special case that we have to handle differently 
+//        tone(10, 10000, usdur);
+//        usout = 0;
+//        break;
+//      case 8:      // Tone is a special case that we have to handle differently 
+//        tone(10, 1000, usdur);
+//        usout = 0;
+//        break;
       default:
         usout = 0;
     }

@@ -1,3 +1,5 @@
+//#include "toneAC.h"
+
 /*
   Conditioning
   to regulate camera, CS (LED, tone, whisker puff, ...), US.
@@ -86,9 +88,6 @@ void checkVars() {
       case 7:
         ISI = value;
         break;
-      case 8:
-        tonefreq5 = value;
-        break;
       case 9:
         camposttime = value;
         break;
@@ -136,7 +135,7 @@ void Triggered() {
 
 void doDelay() {
 
-  csON();
+  csON(); 
 
   usON();
   
@@ -167,19 +166,24 @@ void csON() {
  if (csdur > 0) {
     switch (csch) {
       case 5:
-        Timer1.initialize(3300); //t = 1/f //time interval in microseconds
-        Timer1.pwm(opto, 50); //sends pulse to this pin with 50% duty cycle
-        break;
+      for (int i = 0; i < 4; i++) {
+        digitalWrite(opto, LOW);
+        delay(46);
+        digitalWrite(opto, HIGH);
+        delay(16);
+      }
+      digitalWrite(opto, LOW);
+      break;
     }
-  } 
-}
+   }
+ } 
 
 
 void csOFF() {
-     if (csdur > 0) {
+    if (csdur > 0) {
     switch (csch) {
       case 5:
-        Timer1.disablePwm(opto);
+        digitalWrite(opto, LOW);
         break;
     }
   }
@@ -189,7 +193,7 @@ void usON() {
     if (usdur > 0) {
 
     switch (usch) {
-      case 1:
+      case 3:
         usout = puff;
         break;
       default:

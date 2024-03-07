@@ -1,6 +1,3 @@
-//#include "toneAC.h"
-#include <TimerOne.h>
-
 /*
   Conditioning
   to regulate camera, CS (LED, tone, whisker puff, ...), US.
@@ -10,7 +7,6 @@
 int camera = 8;
 int puff = 13;
 int opto = 10;
-int optoRead = 3;
 
 // Used internally to select channels for CS/US
 int csout = 0;  // Not used yet
@@ -25,7 +21,6 @@ int usch = 3;   // default to ipsi corneal puff
 int ISI = 140;
 int usdur = 30;
 int residual;
-int tonefreq5 = 5000;
 
 unsigned long trialtime = 0; // For keeping track of elapsed time during trial
 
@@ -35,7 +30,6 @@ void setup() {
   pinMode(camera, OUTPUT);
   pinMode(puff, OUTPUT);
   pinMode(opto, OUTPUT);
-  pinMode(optoRead, INPUT);
 
   // Default all output pins to LOW - for some reason they were floating high on the Due before I (Shane) added this
   digitalWrite(camera, LOW);
@@ -144,8 +138,6 @@ void doDelay() {
 
   csON();
 
-  delay(ISI); 
-
   usON();
   
   if (csdur < (ISI+usdur)) {
@@ -174,7 +166,7 @@ void doDelay() {
 void csON() {
  if (csdur > 0) {
     switch (csch) {
-      case 1:
+      case 5:
         Timer1.initialize(3300); //t = 1/f //time interval in microseconds
         Timer1.pwm(opto, 50); //sends pulse to this pin with 50% duty cycle
         break;
@@ -186,7 +178,7 @@ void csON() {
 void csOFF() {
      if (csdur > 0) {
     switch (csch) {
-      case 1:
+      case 5:
         Timer1.disablePwm(opto);
         break;
     }

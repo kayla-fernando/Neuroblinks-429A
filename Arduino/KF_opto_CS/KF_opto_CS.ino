@@ -166,11 +166,11 @@ void csON() {
  if (csdur > 0) {
     switch (csch) {
       case 5:
-      for (int i = 0; i < 4; i++) {
+      for (int i = 0; i < 8; i++) {
         digitalWrite(opto, LOW);
-        delay(46);
+        delay(21);
         digitalWrite(opto, HIGH);
-        delay(16);
+        delay(10);
       }
       digitalWrite(opto, LOW);
       break;
